@@ -29,7 +29,7 @@ func CallSubmit(submit models.Submit) (status int) {
 		log.Println("API call error. ", err.Error())
 		return 500
 	}
-
+	log.Println(response)
 	return response.StatusCode
 }
 
