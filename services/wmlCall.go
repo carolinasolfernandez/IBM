@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"github.com/carolinasolfernandez/IBM/models"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"time"
@@ -29,7 +30,12 @@ func CallSubmit(submit models.Submit) (status int) {
 		log.Println("API call error. ", err.Error())
 		return 500
 	}
-	log.Println(response)
+
+	bodyBytes, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		log.Println("Error reading response body")
+	}
+	log.Println(string(bodyBytes))
 	return response.StatusCode
 }
 
